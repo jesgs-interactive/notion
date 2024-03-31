@@ -23,11 +23,20 @@ class Bootstrap {
 	protected static array $env;
 
 	/**
+	 * Run on plugin init
+	 *
+	 * @return void
+	 */
+	public static function init() {
+		add_action( 'plugins_loaded', array( __CLASS__, 'plugin_loaded' ) );
+	}
+
+	/**
 	 * Do things when the plugin is loaded
 	 *
 	 * @return void
 	 */
-	public static function plugin_loaded() {
+	public static function plugin_loaded(): void {
 		$dotenv = new Dotenv();
 		$dotenv->loadEnv( JESGS_NOTION_ABSPATH . '.env' );
 		self::$env = $_ENV;

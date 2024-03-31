@@ -29,13 +29,10 @@ class DatabaseListTable extends \WP_List_Table {
 	public function __construct( $args = array() ) {
 		parent::__construct( $args );
 		// ping Notion API or check transient for data.
-		// Database::query( '30201d4defff43209f923801ea1a1f8f' );
-		$database_rows = wp_json_file_decode(
-			JESGS_NOTION_ABSPATH . 'tests/test--database-query-data.json',
-			array(
-				'associative' => true,
-			)
-		)['results'];
+		$query['results'] = '';
+		$query            = Database::query( '30201d4defff43209f923801ea1a1f8f' );
+
+		$database_rows = $query['results'];
 
 		$normalized_rows = array();
 		foreach ( $database_rows as $database_row ) {
