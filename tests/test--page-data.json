@@ -1,0 +1,717 @@
+{
+  "object": "list",
+  "results": [
+    {
+      "object": "block",
+      "id": "c13f9c2d-4a78-4c07-8e03-07a9abd9edc3",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:25:00.000Z",
+      "last_edited_time": "2024-01-04T21:25:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "heading_1",
+      "heading_1": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Journey to Light-Responsive Toon Shaders in Eevee",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "Journey to Light-Responsive Toon Shaders in Eevee",
+            "href": null
+          }
+        ],
+        "is_toggleable": false,
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "9a2bacd3-9ae0-45d4-87da-9c777c158765",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:26:00.000Z",
+      "last_edited_time": "2024-03-13T22:58:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Going back to my days of working in Poser, I’ve been on this journey to develop a toon shader that responds to light-color. Moving over to Blender has broadened my horizons. Here is my journey on what I’ve discovered and my approach to this problem that everyone who does non-photo-realistic 3d work, or whose work has combined npr/pr elements, has encountered.",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "Going back to my days of working in Poser, I’ve been on this journey to develop a toon shader that responds to light-color. Moving over to Blender has broadened my horizons. Here is my journey on what I’ve discovered and my approach to this problem that everyone who does non-photo-realistic 3d work, or whose work has combined npr/pr elements, has encountered.",
+            "href": null
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "612dc5d5-8b28-4c1a-b0a7-e6af829293cd",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-05T00:58:00.000Z",
+      "last_edited_time": "2024-01-22T19:34:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Math-driven Toon Shaders",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "Math-driven Toon Shaders",
+            "href": null
+          }
+        ],
+        "is_toggleable": false,
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "1824ec4f-887c-4ff2-b668-835ab66edab6",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:29:00.000Z",
+      "last_edited_time": "2024-01-04T21:29:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "video",
+      "video": {
+        "caption": [],
+        "type": "external",
+        "external": {
+          "url": "https://www.youtube.com/watch?v=VE-B4yu4ysk"
+        }
+      }
+    },
+    {
+      "object": "block",
+      "id": "a4427182-dba2-4912-ba92-11a55fc67234",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:25:00.000Z",
+      "last_edited_time": "2024-01-05T17:54:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "This technique has a lot of possibilities, but the main downside is that it doesn’t respond well to certain lighting conditions, and relies on setting the world background color to black.",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "This technique has a lot of possibilities, but the main downside is that it doesn’t respond well to certain lighting conditions, and relies on setting the world background color to black.",
+            "href": null
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "5c7f45dc-e0f4-48d8-8ef8-e929bc6355d5",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-05T23:02:00.000Z",
+      "last_edited_time": "2024-01-05T23:02:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": true,
+      "archived": false,
+      "type": "column_list",
+      "column_list": {}
+    },
+    {
+      "object": "block",
+      "id": "6c81b909-82e8-4ef2-abed-f6a565c605ab",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:25:00.000Z",
+      "last_edited_time": "2024-01-05T18:00:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "However, this is the problem with the above setup. Because of it's dependence on the world color being pure black, it’s not very flexible when using HDRI lighting, for example:",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "However, this is the problem with the above setup. Because of it's dependence on the world color being pure black, it’s not very flexible when using HDRI lighting, for example:",
+            "href": null
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "61722319-80a6-4b94-9f3d-bf6ec726bd5d",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-05T00:26:00.000Z",
+      "last_edited_time": "2024-01-05T00:26:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "image",
+      "image": {
+        "caption": [],
+        "type": "file",
+        "file": {
+          "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/95b82924-d8e0-4013-9ad5-f9454f0d221c/d25462d1-30f2-4d42-9836-6eb8e3e4ad5d/ToonShader-Math-Nodes-HDRI-light-ex-3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240331%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240331T005226Z&X-Amz-Expires=3600&X-Amz-Signature=bd408ad3c3b45b0230d61c2ea7fa64bc54268f363b7c496bea14bd22859dc105&X-Amz-SignedHeaders=host&x-id=GetObject",
+          "expiry_time": "2024-03-31T01:52:26.670Z"
+        }
+      }
+    },
+    {
+      "object": "block",
+      "id": "0982f706-fab6-40d9-9cd2-730f9e2f3fb0",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:25:00.000Z",
+      "last_edited_time": "2024-01-22T19:33:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Note how everything turns white? Lighting or the shader itself can be adjusted to account for the difference.",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "Note how everything turns white? Lighting or the shader itself can be adjusted to account for the difference.",
+            "href": null
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "ab9efcbb-8217-46f7-a17a-5d4e41e8c79f",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-05T00:29:00.000Z",
+      "last_edited_time": "2024-01-05T00:29:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": true,
+      "archived": false,
+      "type": "column_list",
+      "column_list": {}
+    },
+    {
+      "object": "block",
+      "id": "820544b2-6f21-4d1f-b52b-7206493a20d8",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:25:00.000Z",
+      "last_edited_time": "2024-01-22T19:33:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "An example of a more traditional setup using a grayscale color ramp node set to constant with the HSV value node plugged into the color ramp’s ",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "An example of a more traditional setup using a grayscale color ramp node set to constant with the HSV value node plugged into the color ramp’s ",
+            "href": null
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": "fac",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": true,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "fac",
+            "href": null
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " input above.",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": " input above.",
+            "href": null
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "ed836bc0-9621-41b9-8c1a-d9523657341e",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-05T00:58:00.000Z",
+      "last_edited_time": "2024-01-05T00:59:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "This setup does have a lot of possibilities but does have limitations.",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "This setup does have a lot of possibilities but does have limitations.",
+            "href": null
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "93a14c7b-b38e-4ec2-974b-7979b76029cb",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-05T00:49:00.000Z",
+      "last_edited_time": "2024-01-05T00:49:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "944f24e7-036d-44f7-917d-6642deee2b0d",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-05T17:56:00.000Z",
+      "last_edited_time": "2024-03-13T22:58:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Dealing with Shadow Artifacts in Eevee",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "Dealing with Shadow Artifacts in Eevee",
+            "href": null
+          }
+        ],
+        "is_toggleable": false,
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "b8574f35-2e61-491c-8c7f-99be3c682746",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-05T17:55:00.000Z",
+      "last_edited_time": "2024-03-13T22:58:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "First, I'll start with the most important part: shadows and lighting. Sometimes, you might get jagged edges on your toon shadows. These are usually easily corrected by playing around with the shadow bias of the lights in your scene. Also adjust the shadow map settings in Eevee itself.",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "First, I'll start with the most important part: shadows and lighting. Sometimes, you might get jagged edges on your toon shadows. These are usually easily corrected by playing around with the shadow bias of the lights in your scene. Also adjust the shadow map settings in Eevee itself.",
+            "href": null
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "267a3fc9-e789-4575-847c-8417c9a28e7e",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:25:00.000Z",
+      "last_edited_time": "2024-01-05T00:48:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "My ever-growing playlist on the subject of toon shading in Blender:",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "My ever-growing playlist on the subject of toon shading in Blender:",
+            "href": null
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "83af104c-57da-496d-aa0e-c1a8f85caa2e",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-04T21:30:00.000Z",
+      "last_edited_time": "2024-01-04T21:31:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "https://www.youtube.com/playlist?list=PLGh5Ia-ZDdxJx9bi12xkGYFYSgoRazGhD",
+              "link": {
+                "url": "https://www.youtube.com/playlist?list=PLGh5Ia-ZDdxJx9bi12xkGYFYSgoRazGhD"
+              }
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "https://www.youtube.com/playlist?list=PLGh5Ia-ZDdxJx9bi12xkGYFYSgoRazGhD",
+            "href": "https://www.youtube.com/playlist?list=PLGh5Ia-ZDdxJx9bi12xkGYFYSgoRazGhD"
+          }
+        ],
+        "color": "default"
+      }
+    },
+    {
+      "object": "block",
+      "id": "ab2f344e-0af9-478d-a406-bf84c0e6e184",
+      "parent": {
+        "type": "page_id",
+        "page_id": "45975bc9-e816-4b43-9210-1b98c660245d"
+      },
+      "created_time": "2024-01-22T19:33:00.000Z",
+      "last_edited_time": "2024-01-22T19:33:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "has_children": false,
+      "archived": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [],
+        "color": "default"
+      }
+    }
+  ],
+  "next_cursor": null,
+  "has_more": false,
+  "type": "block",
+  "block": {},
+  "developer_survey": "https://notionup.typeform.com/to/bllBsoI4?utm_source=postman",
+  "request_id": "06ad34b2-4651-4f8a-802a-1d513a6f1f1d"
+}

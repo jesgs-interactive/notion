@@ -1,0 +1,391 @@
+{
+  "object": "list",
+  "results": [
+    {
+      "object": "page",
+      "id": "67c32f65-8891-4789-b040-5fcc5ab55247",
+      "created_time": "2024-03-13T21:05:00.000Z",
+      "last_edited_time": "2024-03-14T00:09:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "30201d4d-efff-4320-9f92-3801ea1a1f8f"
+      },
+      "archived": false,
+      "properties": {
+        "Summary": {
+          "id": "NrL%40",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Odysseus and Tesla steal Gilgamesh’s spot-light in this upcoming lottery event",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Odysseus and Tesla steal Gilgamesh’s spot-light in this upcoming lottery event",
+              "href": null
+            }
+          ]
+        },
+        "URL": {
+          "id": "Rhv%5E",
+          "type": "url",
+          "url": "https://psy-dreamer.com/wp-admin/post.php?post=2955&action=edit"
+        },
+        "Tags": {
+          "id": "Y%5Da%7D",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "69567440-02ea-4f99-ad83-f1fc0cc6d41e",
+              "name": "fate grand order",
+              "color": "purple"
+            },
+            {
+              "id": "b716dd76-8c9f-44ce-9511-bde82a5799d8",
+              "name": "fatego na",
+              "color": "green"
+            },
+            {
+              "id": "e8d2dc0c-19ef-4102-b453-776552ae322c",
+              "name": "events",
+              "color": "purple"
+            }
+          ]
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Battle in New York 2024",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Battle in New York 2024",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/Battle-in-New-York-2024-67c32f6588914789b0405fcc5ab55247",
+      "public_url": null
+    },
+    {
+      "object": "page",
+      "id": "62aa6a60-4ca5-4810-9f4c-1089d781bb65",
+      "created_time": "2024-01-03T20:30:00.000Z",
+      "last_edited_time": "2024-03-05T16:24:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "30201d4d-efff-4320-9f92-3801ea1a1f8f"
+      },
+      "archived": false,
+      "properties": {
+        "Summary": {
+          "id": "NrL%40",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Leverage Cycles to create bump maps for use in Eevee",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Leverage Cycles to create bump maps for use in Eevee",
+              "href": null
+            }
+          ]
+        },
+        "URL": {
+          "id": "Rhv%5E",
+          "type": "url",
+          "url": null
+        },
+        "Tags": {
+          "id": "Y%5Da%7D",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "0ac9b40a-fbc8-47b5-bd37-75fbe65b09eb",
+              "name": "eevee",
+              "color": "pink"
+            },
+            {
+              "id": "b51953ab-cf84-48e6-833e-b2e64780e460",
+              "name": "blender",
+              "color": "orange"
+            },
+            {
+              "id": "f00ccfb9-931b-402d-a75a-aa9d40b24334",
+              "name": "b3d",
+              "color": "yellow"
+            },
+            {
+              "id": "6124fe3a-a6da-40da-b6ac-ba11c574ac69",
+              "name": "toon shading",
+              "color": "gray"
+            }
+          ]
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Anime-style Rocks with Image Textures",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Anime-style Rocks with Image Textures",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/Anime-style-Rocks-with-Image-Textures-62aa6a604ca548109f4c1089d781bb65",
+      "public_url": null
+    },
+    {
+      "object": "page",
+      "id": "45975bc9-e816-4b43-9210-1b98c660245d",
+      "created_time": "2024-01-03T20:30:00.000Z",
+      "last_edited_time": "2024-03-13T22:58:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "30201d4d-efff-4320-9f92-3801ea1a1f8f"
+      },
+      "archived": false,
+      "properties": {
+        "Summary": {
+          "id": "NrL%40",
+          "type": "rich_text",
+          "rich_text": []
+        },
+        "URL": {
+          "id": "Rhv%5E",
+          "type": "url",
+          "url": null
+        },
+        "Tags": {
+          "id": "Y%5Da%7D",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "0ac9b40a-fbc8-47b5-bd37-75fbe65b09eb",
+              "name": "eevee",
+              "color": "pink"
+            },
+            {
+              "id": "b51953ab-cf84-48e6-833e-b2e64780e460",
+              "name": "blender",
+              "color": "orange"
+            },
+            {
+              "id": "f00ccfb9-931b-402d-a75a-aa9d40b24334",
+              "name": "b3d",
+              "color": "yellow"
+            },
+            {
+              "id": "6124fe3a-a6da-40da-b6ac-ba11c574ac69",
+              "name": "toon shading",
+              "color": "gray"
+            }
+          ]
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Journey to Light-responsive Toon Shaders in Eevee",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Journey to Light-responsive Toon Shaders in Eevee",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/Journey-to-Light-responsive-Toon-Shaders-in-Eevee-45975bc9e8164b4392101b98c660245d",
+      "public_url": null
+    },
+    {
+      "object": "page",
+      "id": "fbf40207-5b67-471e-a986-74a734609534",
+      "created_time": "2024-01-03T20:30:00.000Z",
+      "last_edited_time": "2024-03-13T20:08:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43174a27-c8d9-4fb3-b491-6159f8eca0d8"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "30201d4d-efff-4320-9f92-3801ea1a1f8f"
+      },
+      "archived": false,
+      "properties": {
+        "Summary": {
+          "id": "NrL%40",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "FateGO’s 2024 CBC event featuring a new future Servant who looks suspiciously like an actor from the ‘80s",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "FateGO’s 2024 CBC event featuring a new future Servant who looks suspiciously like an actor from the ‘80s",
+              "href": null
+            }
+          ]
+        },
+        "URL": {
+          "id": "Rhv%5E",
+          "type": "url",
+          "url": "https://psy-dreamer.com/wp-admin/post.php?post=2940&action=edit"
+        },
+        "Tags": {
+          "id": "Y%5Da%7D",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "69567440-02ea-4f99-ad83-f1fc0cc6d41e",
+              "name": "fate grand order",
+              "color": "purple"
+            },
+            {
+              "id": "e8d2dc0c-19ef-4102-b453-776552ae322c",
+              "name": "events",
+              "color": "purple"
+            },
+            {
+              "id": "b716dd76-8c9f-44ce-9511-bde82a5799d8",
+              "name": "fatego na",
+              "color": "green"
+            }
+          ]
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "FGO NA: White Day Event 2024",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "FGO NA: White Day Event 2024",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/FGO-NA-White-Day-Event-2024-fbf402075b67471ea98674a734609534",
+      "public_url": null
+    }
+  ],
+  "next_cursor": null,
+  "has_more": false,
+  "type": "page_or_database",
+  "page_or_database": {},
+  "developer_survey": "https://notionup.typeform.com/to/bllBsoI4?utm_source=postman",
+  "request_id": "def324c9-5960-403a-ac39-70156de4f937"
+}
