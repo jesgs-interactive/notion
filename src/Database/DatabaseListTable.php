@@ -8,7 +8,8 @@
 namespace JesGs\Notion\Database;
 
 use Illuminate\Support\Arr;
-use JesGs\Notion\Database\Model\Page\Page;
+use JesGs\Notion\Admin\Admin;
+use JesGs\Notion\Model\Page\Page;
 
 /**
  * List Table that extends WP's List Table class
@@ -74,14 +75,7 @@ class DatabaseListTable extends \WP_List_Table {
 	 * @return mixed|void
 	 */
 	public function column_default( $item, $column_name ) {
-		switch ( $column_name ) {
-			case 'title':
-			case 'summary':
-			case 'tags':
-			case 'url':
-			default:
-				return $item[ $column_name ];
-		}
+		return $item[ $column_name ];
 	}
 
 	/**
@@ -150,11 +144,20 @@ class DatabaseListTable extends \WP_List_Table {
 
 			$title = $row['name'];
 
+			$admin_url = add_query_arg(
+				array(
+					'page'           => Admin::ADMIN_PAGE_SLUG,
+					'notion_page_id' => $database_row->get_id(),
+				),
+				admin_url( 'options-general.php' )
+			);
+
 			$row['name'] = vsprintf(
-				'<a href="%2$s" rel="noopener nofollow" target="_blank">%1$s</a>',
+				'<a href="%3$s">%1$s</a> <br /><a href="%2$s" rel="noopener nofollow" target="_blank">View on Notion</a>',
 				array(
 					$title,
 					$database_row->get_url(),
+					$admin_url,
 				)
 			);
 

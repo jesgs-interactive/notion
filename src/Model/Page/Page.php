@@ -5,9 +5,9 @@
  * @package JesGs\Notion
  */
 
-namespace JesGs\Notion\Database\Model\Page;
+namespace JesGs\Notion\Model\Page;
 
-use JesGs\Notion\Database\Model\Model;
+use JesGs\Notion\Model\Model;
 
 /**
  * Page data model class

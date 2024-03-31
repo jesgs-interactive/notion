@@ -1,6 +1,6 @@
 <?php
 
-namespace JesGs\Notion\Database\Model;
+namespace JesGs\Notion\Model;
 
 /**
  * Data model class
