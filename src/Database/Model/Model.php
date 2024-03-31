@@ -2,14 +2,17 @@
 
 namespace JesGs\Notion\Database\Model;
 
+/**
+ * Data model class
+ */
 class Model {
 
 	/**
 	 * Database ID (local)
 	 *
-	 * @var int
+	 * @var string
 	 */
-	protected int $id;
+	protected string $id;
 
 	/**
 	 * Notion Object type
@@ -17,4 +20,19 @@ class Model {
 	 * @var string
 	 */
 	protected string $object = '';
+
+	/**
+	 * Assign parameters on initialization
+	 *
+	 * @param array $params Array of parameters.
+	 */
+	public function __construct( array $params = array() ) {
+		foreach ( $params as $param => $data ) {
+			if ( ! property_exists( $this, $param ) ) {
+				continue;
+			}
+
+			$this->$param = $data;
+		}
+	}
 }

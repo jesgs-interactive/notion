@@ -56,4 +56,19 @@ class Bootstrap {
 
 		return self::$env['SECRET'];
 	}
+
+
+	/**
+	 * Set up the authorization bearer token header
+	 *
+	 * @param string $secret Secret key.
+	 *
+	 * @return array|string[]
+	 */
+	public static function get_authorization( string $secret ): array {
+		$auth_string                          = self::$authorization['Authorization'];
+		self::$authorization['Authorization'] = sprintf( $auth_string, $secret );
+
+		return self::$authorization;
+	}
 }
