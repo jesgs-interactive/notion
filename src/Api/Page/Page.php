@@ -53,20 +53,40 @@ class Page {
 	 *
 	 * @return array
 	 */
-	public static function get_children( string $block_id ) {
+	public static function get_children( string $block_id ): array {
 		$data = self::query( $block_id );
 		if ( empty( $data['results'] ) ) {
 			return array();
 		}
 
-		$new_data_array = array();
+		$found_children = array();
+		$children       = array();
 		foreach ( $data['results'] as $result ) {
+			$children = self::get_children_recursive( $result['id'], $found_children );
+		}
+		return $children;
+	}
+
+
+	/**
+	 * Iterate over array of results until child is found.
+	 *
+	 * @param string $id            Block to iterate over.
+	 * @param array  $found_children Children found by iterating.
+	 *
+	 * @return array
+	 */
+	public static function get_children_recursive( string $id, array &$found_children = array() ): array {
+		$data = self::query( $id );
+
+		foreach ( $data['results'] as &$result ) {
 			if ( false === $result['has_children'] ) {
-				var_dump($result);
+				$found_children[] = $result;
 			}
-			self::get_children( $result['id'] );
+
+			$result = self::get_children_recursive( $result['id'] );
 		}
 
-		return $data;
+		return $found_children;
 	}
 }

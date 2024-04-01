@@ -90,8 +90,8 @@ class Admin {
 		$blocks = $data['results'];
 		foreach ( $blocks as $block ) {
 			$type = $block['type'];
-			if ( true === $block['has_children'] ) {
-				$results = Page::get_children( $block['id'] );
+			if ( isset( $block['has_children'] ) && true === $block['has_children'] ) {
+				$block[ $type ] = Page::get_children( $block['id'] );
 			}
 		}
 	}
