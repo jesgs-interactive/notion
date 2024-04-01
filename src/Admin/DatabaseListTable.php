@@ -5,10 +5,9 @@
  * @package JesGs\Notion
  */
 
-namespace JesGs\Notion\Database;
+namespace JesGs\Notion\Admin;
 
 use Illuminate\Support\Arr;
-use JesGs\Notion\Admin\Admin;
 use JesGs\Notion\Api\Database\Database;
 use JesGs\Notion\Model\Page\Page;
 
@@ -60,7 +59,7 @@ class DatabaseListTable extends \WP_List_Table {
 	public function get_columns(): array {
 		return array(
 			'cb'      => '<input type="checkbox" />',
-			'name'    => 'Page Name (Title)',
+			'name'    => 'Block Name (Title)',
 			'summary' => 'Summary',
 			'tags'    => 'Tags',
 			'url'     => 'URL',
@@ -82,7 +81,7 @@ class DatabaseListTable extends \WP_List_Table {
 	/**
 	 * Return checkbox with assigned value.
 	 *
-	 * @param string $item Page UUID on Notion.
+	 * @param string $item Block UUID on Notion.
 	 *
 	 * @return string|void
 	 */

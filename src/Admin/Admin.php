@@ -7,8 +7,8 @@
 
 namespace JesGs\Notion\Admin;
 
+use JesGs\Notion\Api\Block\Block;
 use JesGs\Notion\Api\Page\Page;
-use JesGs\Notion\Database\DatabaseListTable;
 use JesGs\Notion\Singleton;
 
 /**
@@ -20,7 +20,7 @@ class Admin {
 	const ADMIN_PAGE_SLUG = 'notion-database-list';
 
 	/**
-	 * Page hook
+	 * Block hook
 	 *
 	 * @var ?string
 	 */
@@ -80,19 +80,9 @@ class Admin {
 			return;
 		}
 
-		echo '<h2>Freaky Page Things</h2>';
+		$page_data = Page::query( $notion_page_id );
+
+		echo '<h2>Import Page</h2>';
 		echo '<p>Import this page? [Import]</p>';
-		echo '<p>' . $notion_page_id . '</p>';
-
-		// start new query for page here.
-		$data = Page::query( $notion_page_id );
-
-		$blocks = $data['results'];
-		foreach ( $blocks as $block ) {
-			$type = $block['type'];
-			if ( isset( $block['has_children'] ) && true === $block['has_children'] ) {
-				$block[ $type ] = Page::get_children( $block['id'] );
-			}
-		}
 	}
 }

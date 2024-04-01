@@ -56,9 +56,7 @@ class Database {
 			Cache::set_results_cache( $id, $cached_results );
 		}
 
-		$results = self::model_data( json_decode( $cached_results, true ) );
-
-		return $results;
+		return self::model_data( json_decode( $cached_results, true ) );
 	}
 
 	/**

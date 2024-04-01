@@ -1,6 +1,6 @@
 <?php
 /**
- * Page Model
+ * Block Model
  *
  * @package JesGs\Notion
  */
@@ -10,19 +10,19 @@ namespace JesGs\Notion\Model\Page;
 use JesGs\Notion\Model\Model;
 
 /**
- * Page data model class
+ * Block data model class
  */
 class Page extends Model {
 
 	/**
-	 * Page ID in Database
+	 * Block ID in Database
 	 *
 	 * @var string
 	 */
 	protected string $id;
 
 	/**
-	 * Page ID on Notion
+	 * Block ID on Notion
 	 *
 	 * @var string
 	 */
@@ -71,7 +71,7 @@ class Page extends Model {
 	protected ?array $cover = array();
 
 	/**
-	 * Page icon image object
+	 * Block icon image object
 	 *
 	 * @var ?array
 	 */
@@ -204,5 +204,9 @@ class Page extends Model {
 	 */
 	public function get_properties(): array {
 		return $this->properties;
+	}
+
+	public function get_title(): string {
+
 	}
 }
