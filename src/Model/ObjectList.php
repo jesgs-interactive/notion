@@ -5,7 +5,7 @@
  * @package JesGs\Notion
  */
 
-namespace JesGs\Notion\Database;
+namespace JesGs\Notion\Model;
 
 use Illuminate\Support\Collection;
 
@@ -28,7 +28,12 @@ class ObjectList extends Collection {
 	 */
 	protected $items = array();
 
-	public function __construct( $items = [] ) {
+	/**
+	 * Initialize list
+	 *
+	 * @param array $items Array of items.
+	 */
+	public function __construct( $items = array() ) {
 		$list = array();
 		foreach ( $items as $item ) {
 			if ( empty( $item['object'] ) ) {
@@ -36,7 +41,7 @@ class ObjectList extends Collection {
 			}
 
 			$object       = ucwords( $item['object'] );
-			$object_class = 'JesGs\Notion\Database\Model\\' . $object . '\\' . $object;
+			$object_class = 'JesGs\Notion\Model\\' . $object . '\\' . $object;
 
 			if ( class_exists( $object_class ) ) {
 				$list[] = new $object_class( $item );

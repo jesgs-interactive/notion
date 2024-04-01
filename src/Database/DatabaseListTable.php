@@ -9,6 +9,7 @@ namespace JesGs\Notion\Database;
 
 use Illuminate\Support\Arr;
 use JesGs\Notion\Admin\Admin;
+use JesGs\Notion\Api\Database\Database;
 use JesGs\Notion\Model\Page\Page;
 
 /**

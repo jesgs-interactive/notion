@@ -7,6 +7,7 @@
 
 namespace JesGs\Notion\Admin;
 
+use JesGs\Notion\Api\Page\Page;
 use JesGs\Notion\Database\DatabaseListTable;
 use JesGs\Notion\Singleton;
 
@@ -64,5 +65,34 @@ class Admin {
 		$database_list = new DatabaseListTable();
 		$database_list->prepare_items();
 		$database_list->display();
+
+		$this->show_notion_page_data();
+	}
+
+	/**
+	 * Display data from page on Notion
+	 *
+	 * @return void
+	 */
+	public function show_notion_page_data(): void {
+		$notion_page_id = filter_input( INPUT_GET, 'notion_page_id', FILTER_SANITIZE_URL );
+		if ( ! $notion_page_id ) {
+			return;
+		}
+
+		echo '<h2>Freaky Page Things</h2>';
+		echo '<p>Import this page? [Import]</p>';
+		echo '<p>' . $notion_page_id . '</p>';
+
+		// start new query for page here.
+		$data = Page::query( $notion_page_id );
+
+		$blocks = $data['results'];
+		foreach ( $blocks as $block ) {
+			$type = $block['type'];
+			if ( true === $block['has_children'] ) {
+				$results = Page::get_children( $block['id'] );
+			}
+		}
 	}
 }

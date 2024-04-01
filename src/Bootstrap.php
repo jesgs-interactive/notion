@@ -45,30 +45,14 @@ class Bootstrap {
 	}
 
 	/**
-	 * Get the secret key for Notion
+	 * Get environment variable
 	 *
-	 * @return string
+	 * @param string $env_var Environment variable to grab.
+	 *
+	 * @return false|mixed
 	 */
-	public static function get_secret(): string {
-		if ( empty( self::$env['SECRET'] ) ) {
-			return '';
-		}
-
-		return self::$env['SECRET'];
-	}
-
-
-	/**
-	 * Set up the authorization bearer token header
-	 *
-	 * @param string $secret Secret key.
-	 *
-	 * @return array|string[]
-	 */
-	public static function get_authorization( string $secret ): array {
-		$auth_string                          = self::$authorization['Authorization'];
-		self::$authorization['Authorization'] = sprintf( $auth_string, $secret );
-
-		return self::$authorization;
+	public static function get_env( string $env_var ): mixed {
+		// @phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		return $_ENV[ $env_var ] ?? false;
 	}
 }
