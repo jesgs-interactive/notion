@@ -30,7 +30,7 @@ class Page {
 	 * @return \JesGs\Notion\Model\Page\Page
 	 */
 	public static function query( string $id ): \JesGs\Notion\Model\Page\Page {
-		$cached_results = Cache::get_results_cache( 'page-' . $id );
+		$cached_results = Cache::get_results_cache( '-page-' . $id );
 		if ( empty( $cached_results ) ) {
 			$url           = vsprintf( self::$api_endpoint, array( $id ) );
 			$response      = wp_remote_get( $url, self::build_query_request_headers() );
@@ -40,7 +40,7 @@ class Page {
 			}
 
 			$cached_results = wp_remote_retrieve_body( $response );
-			Cache::set_results_cache( $id, $cached_results );
+			Cache::set_results_cache( '-page-' . $id, $cached_results );
 		}
 
 		return new \JesGs\Notion\Model\Page\Page( json_decode( $cached_results, true ) );

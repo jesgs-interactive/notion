@@ -8,6 +8,7 @@
 namespace JesGs\Notion\Admin;
 
 use JesGs\Notion\Api\Block\Block;
+use JesGs\Notion\Parser\Block as BlockParser;
 use JesGs\Notion\Api\Page\Page;
 use JesGs\Notion\Singleton;
 
@@ -80,9 +81,10 @@ class Admin {
 			return;
 		}
 
-		$page_data = Page::query( $notion_page_id );
-
+		$page_data = Block::query( $notion_page_id );
 		echo '<h2>Import Page</h2>';
 		echo '<p>Import this page? [Import]</p>';
+
+		echo BlockParser::parse_blocks( $page_data );
 	}
 }

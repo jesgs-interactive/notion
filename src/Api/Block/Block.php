@@ -31,7 +31,7 @@ class Block {
 	 * @return array
 	 */
 	public static function query( string $page_id ) {
-		$cached_results = Cache::get_results_cache( $page_id );
+		$cached_results = Cache::get_results_cache( '-blocks-' . $page_id );
 		if ( empty( $cached_results ) ) {
 			$url           = vsprintf( self::$api_endpoint, array( $page_id ) );
 			$response      = wp_remote_get( $url, self::build_query_request_headers() );
@@ -41,7 +41,7 @@ class Block {
 			}
 
 			$cached_results = wp_remote_retrieve_body( $response );
-			Cache::set_results_cache( $page_id, $cached_results );
+			Cache::set_results_cache( '-blocks-' . $page_id, $cached_results );
 		}
 
 		return json_decode( $cached_results, true );
