@@ -85,6 +85,17 @@ class Admin {
 		echo '<h2>Import Page</h2>';
 		echo '<p>Import this page? [Import]</p>';
 
-		echo BlockParser::parse_blocks( $page_data );
+		echo "\t" . '<style>' . "\r\n";
+		echo "\t\t" . '.post-entry-bullshit img {' . "\r\n";
+		echo "\t\t\t" . 'height: 400px;' . "\r\n";
+		echo "\t\t\t" . 'width: auto;' . "\r\n";
+		echo "\t\t}\r\n";
+
+		echo "\t" . '</style>' . "\r\n";
+
+		echo '<div class="post-entry-bullshit">';
+		// echo apply_filters( 'the_content', BlockParser::pre_parse_blocks( $page_data ) );
+		echo BlockParser::pre_parse_blocks( $page_data );
+		echo '</div>';
 	}
 }
