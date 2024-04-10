@@ -10,6 +10,7 @@ namespace JesGs\Notion\Admin;
 use Illuminate\Support\Arr;
 use JesGs\Notion\Api\Database\Database;
 use JesGs\Notion\Model\Page\Page;
+use JesGs\Notion\Options\Settings;
 
 /**
  * List Table that extends WP's List Table class
@@ -31,8 +32,9 @@ class DatabaseListTable extends \WP_List_Table {
 	public function __construct( $args = array() ) {
 		parent::__construct( $args );
 
+		$db_id = Settings::get_setting( 'notion_database_id' );
 		// ping Notion API or check transient for data.
-		$query = Database::query( '30201d4defff43209f923801ea1a1f8f' );
+		$query = Database::query( $db_id );
 
 		$this->table_data = $this->get_normalized_rows( $query->all() );
 	}

@@ -8,6 +8,8 @@
 namespace JesGs\Notion;
 
 use JesGs\Notion\Admin\Admin;
+use JesGs\Notion\Options\Options;
+use JesGs\Notion\Options\Settings;
 use Symfony\Component\Dotenv\Dotenv;
 
 /**
@@ -37,22 +39,8 @@ class Bootstrap {
 	 * @return void
 	 */
 	public static function plugin_loaded(): void {
-		$dotenv = new Dotenv();
-		$dotenv->loadEnv( JESGS_NOTION_ABSPATH . '.env' );
-		self::$env = $_ENV;
-
+		Settings::get_instance()->init();
 		Admin::get_instance()->init();
-	}
-
-	/**
-	 * Get environment variable
-	 *
-	 * @param string $env_var Environment variable to grab.
-	 *
-	 * @return false|mixed
-	 */
-	public static function get_env( string $env_var ): mixed {
-		// @phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		return $_ENV[ $env_var ] ?? false;
+		Options::get_instance()->init();
 	}
 }

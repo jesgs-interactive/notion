@@ -203,14 +203,19 @@ class Block {
 
 		$text = self::parse_rich_text( $heading_content['rich_text'], true );
 
-		$heading_markup = '<!-- wp:heading {"level":%1$d} -->' . self::CRLF
-							. '<h%1$s>%2$s</h%1$s>' . self::CRLF
-							. '<!-- /wp:heading-->' . self::CRLF;
-
 		// don't parse rich text, as headings have their own styles.
 		list( , $size ) = explode( '_', $heading );
 
-		return vsprintf( $heading_markup, array( $size, $text ) );
+		$json_string = ' ';
+		if ( 1 === (int) $size ) {
+			$json_string = ' {"level":1} ';
+		}
+
+		$heading_markup = '<!-- wp:heading%3$s-->' . self::CRLF
+							. '<h%1$s class="wp-block-heading">%2$s</h%1$s>' . self::CRLF
+							. '<!-- /wp:heading -->' . self::CRLF;
+
+		return vsprintf( $heading_markup, array( $size, $text, $json_string ) );
 	}
 
 	/**
@@ -282,9 +287,7 @@ class Block {
 		}
 
 		$html .= '</figure>';
-		$ret   = self::wrap_block( $html, 'image', array( 'sizeSlug' => 'large' ) );
-
-		return $ret;
+		return self::wrap_block( $html, 'image', array( 'sizeSlug' => 'large' ) );
 	}
 
 	/**
@@ -304,6 +307,11 @@ class Block {
 				. '<div class="wp-block-columns">';
 
 		foreach ( $children as $child ) {
+			$type = $child['type'];
+			if ( isset( $child[ $type ]['rich_text'] ) && empty( $child[ $type ]['rich_text'] ) ) {
+				continue;
+			}
+
 			$html .= '<!-- wp:column -->'
 					. '<div class="wp-block-column">';
 			$html .= self::select_block_type_to_parse( $child );

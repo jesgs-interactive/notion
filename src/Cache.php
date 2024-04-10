@@ -83,20 +83,33 @@ class Cache {
 	public static function get_results_cache( string $id ): ?string {
 		global $wpdb;
 
-		$transient_name = '_transient-' . self::$transient_name . $id;
+		$transient_name         = '_transient-' . self::$transient_name . $id;
+		$transient_timeout_name = '_transient_timeout_' . self::$transient_name . $id;
 
 		// @phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- I wouldn't have to do this if WP's option functions didn't eff up JSON
-		$row = $wpdb->get_row(
+		$cached_time = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1",
+				$transient_timeout_name
+			)
+		);
+
+		if ( time() > (int) $cached_time ) {
+			return null;
+		}
+
+		// @phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- I wouldn't have to do this if WP's option functions didn't eff up JSON
+		$row_value = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1",
 				$transient_name
 			)
 		);
 
-		if ( ! is_object( $row ) ) {
+		if ( ! is_object( $row_value ) ) {
 			return false;
 		}
 
-		return $row->option_value;
+		return $row_value->option_value;
 	}
 }

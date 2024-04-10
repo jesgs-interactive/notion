@@ -8,6 +8,7 @@
 namespace JesGs\Notion\Admin;
 
 use JesGs\Notion\Api\Block\Block;
+use JesGs\Notion\Options\Options;
 use JesGs\Notion\Parser\Block as BlockParser;
 use JesGs\Notion\Api\Page\Page;
 use JesGs\Notion\Singleton;
@@ -57,7 +58,15 @@ class Admin {
 	 * @return void
 	 */
 	public function output_admin_page() {
-		echo '<h1>' . esc_html__( 'List of Pages in Notion', 'jesgs_notion' ) . '</h1>';
+		echo '<div class="wrap">';
+		echo '<form action="options.php" method="post" id="jesgs_notion_options_form">';
+		settings_fields( Options::OPTIONS_GROUP_NAME );
+		do_settings_sections( Options::OPTIONS_GROUP_NAME . '-main' );
+		echo '<p>';
+		submit_button();
+		echo '</p>';
+		echo '</form>';
+		echo '<h2>' . esc_html__( 'List of Pages in Notion', 'jesgs_notion' ) . '</h2>';
 
 		/**
 		 * We'll want to store the database list somehow so we're not repeatedly hitting Notions's API.
@@ -68,6 +77,7 @@ class Admin {
 		$database_list->display();
 
 		$this->show_notion_page_data();
+		echo '</div>';
 	}
 
 	/**
@@ -96,6 +106,6 @@ class Admin {
 		echo '<div class="post-entry-bullshit">';
 		// echo apply_filters( 'the_content', BlockParser::pre_parse_blocks( $page_data ) );
 		echo BlockParser::pre_parse_blocks( $page_data );
-		echo '</div>';
+		echo "\r\n" . '</div>';
 	}
 }

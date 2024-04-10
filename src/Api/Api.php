@@ -2,7 +2,7 @@
 
 namespace JesGs\Notion\Api;
 
-use JesGs\Notion\Bootstrap;
+use JesGs\Notion\Options\Settings;
 
 trait Api {
 
@@ -78,10 +78,6 @@ trait Api {
 	 * @return string
 	 */
 	public static function get_secret(): string {
-		if ( empty( Bootstrap::get_env( 'SECRET' ) ) ) {
-			return '';
-		}
-
-		return Bootstrap::get_env( 'SECRET' );
+		return Settings::get_setting( 'notion_api_key' );
 	}
 }
