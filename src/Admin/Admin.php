@@ -106,16 +106,15 @@ class Admin {
 		echo '<p>Import this page? [<a href="' . esc_url( $admin_url ) . '">Import</a>]</p>';
 
 		echo "\t" . '<style>' . "\r\n";
-		echo "\t\t" . '.post-entry-bullshit img {' . "\r\n";
+		echo "\t\t" . '.preview-content-import img {' . "\r\n";
 		echo "\t\t\t" . 'height: 400px;' . "\r\n";
 		echo "\t\t\t" . 'width: auto;' . "\r\n";
 		echo "\t\t}\r\n";
 
 		echo "\t" . '</style>' . "\r\n";
 
-		echo '<div class="post-entry-bullshit">';
-		// echo apply_filters( 'the_content', BlockParser::pre_parse_blocks( $page_data ) );
-		echo BlockParser::pre_parse_blocks( $page_data );
+		echo '<div class="preview-content-import">';
+		echo apply_filters( 'the_content', BlockParser::pre_parse_blocks( $page_data ) );
 		echo "\r\n" . '</div>';
 	}
 }
