@@ -66,6 +66,7 @@ class Admin {
 		submit_button();
 		echo '</p>';
 		echo '</form>';
+
 		echo '<h2>' . esc_html__( 'List of Pages in Notion', 'jesgs_notion' ) . '</h2>';
 
 		/**
@@ -91,9 +92,18 @@ class Admin {
 			return;
 		}
 
+		$admin_url = add_query_arg(
+			array(
+				'page'           => self::ADMIN_PAGE_SLUG,
+				'notion_page_id' => $notion_page_id,
+				'nonce'          => wp_create_nonce( 'notion_import' ),
+			),
+			admin_url( 'options-general.php' )
+		);
+
 		$page_data = Block::query( $notion_page_id );
 		echo '<h2>Import Page</h2>';
-		echo '<p>Import this page? [Import]</p>';
+		echo '<p>Import this page? [<a href="' . esc_url( $admin_url ) . '">Import</a>]</p>';
 
 		echo "\t" . '<style>' . "\r\n";
 		echo "\t\t" . '.post-entry-bullshit img {' . "\r\n";
