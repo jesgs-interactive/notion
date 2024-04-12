@@ -92,6 +92,7 @@ class Block {
 
 				$block_prev = ! empty( $blocks[ $c - 1 ] ) ? $blocks[ $c - 1 ] : false;
 				if ( $block_prev && $block_prev['type'] !== $type ) {
+					$list_output = '';
 					$list_items = array();
 				}
 
@@ -525,6 +526,11 @@ class Block {
 		$sub_list   = '';
 
 		if ( $block['has_children'] ) {
+			$wrap_html = $this->wrap_block( '<ul>%s</ul>', 'list' );
+			if ( str_contains( $type, 'numbered' ) ) {
+				$wrap_html = $this->wrap_block( '<ol>%s</ol>', 'list', array( 'ordered' => true ) );
+			}
+
 			$children = \JesGs\Notion\Api\Block\Block::get_children( $block['id'] );
 
 			foreach ( $children as $child ) {
@@ -534,7 +540,7 @@ class Block {
 			}
 
 			$list_items_string = implode( '', $list_items );
-			$sub_list          = sprintf( $list_html, $list_items_string );
+			$sub_list          = sprintf( $wrap_html, $list_items_string );
 		}
 
 		return vsprintf( $list_item, array( $list_item_content, $sub_list ) );
