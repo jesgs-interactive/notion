@@ -10,7 +10,6 @@ namespace JesGs\Notion\Admin;
 use JesGs\Notion\Api\Block\Block;
 use JesGs\Notion\Options\Options;
 use JesGs\Notion\Parser\Block as BlockParser;
-use JesGs\Notion\Api\Page\Page;
 use JesGs\Notion\Singleton;
 
 /**
@@ -114,7 +113,8 @@ class Admin {
 		echo "\t" . '</style>' . "\r\n";
 
 		echo '<div class="preview-content-import">';
-		echo apply_filters( 'the_content', BlockParser::pre_parse_blocks( $page_data ) );
+//		echo apply_filters( 'the_content', BlockParser::pre_parse_blocks( $page_data ) );
+		echo BlockParser::pre_parse_blocks( $page_data );
 		echo "\r\n" . '</div>';
 	}
 }

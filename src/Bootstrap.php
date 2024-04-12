@@ -10,6 +10,7 @@ namespace JesGs\Notion;
 use JesGs\Notion\Admin\Admin;
 use JesGs\Notion\Options\Options;
 use JesGs\Notion\Options\Settings;
+use JesGs\Notion\Parser\Block;
 use Symfony\Component\Dotenv\Dotenv;
 
 /**
@@ -42,5 +43,6 @@ class Bootstrap {
 		Settings::get_instance()->init();
 		Admin::get_instance()->init();
 		Options::get_instance()->init();
+		Block::get_instance()->init();
 	}
 }

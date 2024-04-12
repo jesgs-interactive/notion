@@ -63,8 +63,13 @@ class Block {
 		$found_children = array();
 		$children       = array();
 		foreach ( $data['results'] as $result ) {
-			$children = self::get_children_recursive( $result['id'], $found_children );
+			if ( ! $result['has_children'] ) {
+				$children[] = $result;
+			} else {
+				$children = self::get_children_recursive( $result['id'], $found_children );
+			}
 		}
+
 		return $children;
 	}
 

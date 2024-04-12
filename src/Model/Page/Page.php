@@ -205,8 +205,4 @@ class Page extends Model {
 	public function get_properties(): array {
 		return $this->properties;
 	}
-
-	public function get_title(): string {
-
-	}
 }

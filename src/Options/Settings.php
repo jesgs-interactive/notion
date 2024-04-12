@@ -28,7 +28,7 @@ class Settings {
 	 * @return void
 	 */
 	public function init() {
-		self::$settings = get_option( Options::OPTIONS_GROUP_NAME );
+		self::$settings = (array) get_option( Options::OPTIONS_GROUP_NAME );
 	}
 
 	/**

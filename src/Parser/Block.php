@@ -4,9 +4,11 @@
  *
  * @package JesGs\Notion
  */
+// @phpcs:disable WordPress.NamingConventions.ValidHookName.UseUnderscores
 
 namespace JesGs\Notion\Parser;
 
+use JesGs\Notion\Model\Embed;
 use JesGs\Notion\Singleton;
 
 /**
@@ -33,7 +35,18 @@ class Block {
 	 * @return void
 	 */
 	public function init() {
-		// TODO: Implement init() method.
+		add_filter( 'jesgs_notion/parse/bookmark', array( $this, 'parse_bookmark' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/bulleted_list_item', array( $this, 'parse_list_item' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/numbered_list_item', array( $this, 'parse_list_item' ), 11, 3 );
+		// add_filter( 'jesgs_notion/parse/columns', array( $this, 'parse_columns' ), 11, 3  )
+		add_filter( 'jesgs_notion/parse/caption', array( $this, 'parse_caption' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/heading_1', array( $this, 'parse_heading' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/heading_2', array( $this, 'parse_heading' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/heading_3', array( $this, 'parse_heading' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/image', array( $this, 'parse_image' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/paragraph', array( $this, 'parse_paragraph' ), 11, 3 );
+		// add_filter( 'jesgs_notion/parse/table', array( $this, 'parse_table' ), 11, 3  );
+		add_filter( 'jesgs_notion/parse/video', array( $this, 'parse_video' ), 11, 3 );
 	}
 
 	/**
@@ -63,40 +76,36 @@ class Block {
 	 * @return string
 	 */
 	public static function parse_blocks( array $blocks, string $html = '' ): string {
-		foreach ( $blocks as $block ) {
-			$type          = $block['type'];
-			$block_content = $block[ $type ];
+		$html         = '';
+		$group_blocks = array( 'bulleted_list_item', 'numbered_list_item' );
+		$list_items   = array();
+		$list_output  = '';
+		foreach ( $blocks as $c => $block ) {
+			$type = $block['type'];
+			if ( ! in_array( $type, $group_blocks, true ) ) {
+				$html .= apply_filters( "jesgs_notion/parse/{$type}", '', $block, $type );
+			} else {
+				$list = self::get_instance()->wrap_block( '<ul>%s</ul>', 'list' );
+				if ( str_contains( $type, 'numbered' ) ) {
+					$list = self::get_instance()->wrap_block( '<ol>%s</ol>', 'list', array( 'ordered' => true ) );
+				}
 
-			if ( str_contains( $type, 'heading_' ) ) {
-				$html .= self::parse_heading( $type, $block_content ) . self::CRLF;
-			}
+				$block_prev = ! empty( $blocks[ $c - 1 ] ) ? $blocks[ $c - 1 ] : false;
+				if ( $block_prev && $block_prev['type'] !== $type ) {
+					$list_items = array();
+				}
 
-			if ( 'paragraph' === $type ) {
-				$html .= self::parse_paragraph( $block_content );
-			}
+				$list_items[] = apply_filters( "jesgs_notion/parse/{$type}", $list, $block, $type );
 
-			if ( 'video' === $type ) {
-				$html .= self::parse_video( $block_content );
-			}
+				$block_next = ! empty( $blocks[ $c + 1 ] ) ? $blocks[ $c + 1 ] : false;
+				if ( $block_next && $block_next['type'] !== $type ) {
+					$list_output = sprintf( $list, implode( '', $list_items ) );
+				}
 
-			if ( 'image' === $type ) {
-				$html .= self::parse_image( $block_content );
-			}
-
-			if ( 'file' === $type ) {
-				$html .= self::parse_file( $block_content );
-			}
-
-			if ( 'column_list' === $type ) {
-				$html .= self::parse_columns( $block['id'] );
-			}
-
-			if ( 'bookmark' === $type ) {
-				$html .= self::parse_bookmark( $block_content );
-			}
-
-			if ( 'table' === $type ) {
-				$html .= self::parse_table( $block['id'] );
+				echo '<pre>';
+				echo esc_html( $list_output );
+				echo '</pre>';
+				$html .= $list_output;
 			}
 		}
 
@@ -110,7 +119,7 @@ class Block {
 	 *
 	 * @return string
 	 */
-	public static function select_block_type_to_parse( array $block ): string {
+	public function select_block_type_to_parse( array $block ): string {
 		$type          = $block['type'];
 		$block_content = $block[ $type ];
 
@@ -139,7 +148,7 @@ class Block {
 	 *
 	 * @return string
 	 */
-	public static function parse_rich_text( array $rich_text, bool $plain_text_only = false ): string {
+	public function parse_rich_text( array $rich_text, bool $plain_text_only = false ): string {
 		$html = '';
 		foreach ( $rich_text as $rt ) {
 			if ( ! $plain_text_only ) {
@@ -160,7 +169,7 @@ class Block {
 	 *
 	 * @return string
 	 */
-	public static function parse_annotations( string $text, array $annotations ): string {
+	public function parse_annotations( string $text, array $annotations ): string {
 		// grab color value first.
 		$color = $annotations['color'];
 		unset( $annotations['color'] );
@@ -191,50 +200,56 @@ class Block {
 	/**
 	 * Parse heading block
 	 *
-	 * @param string $heading Heading type.
-	 * @param array  $heading_content Heading block data.
-	 *
+	 * @param string $html String passed from filter init.
+	 * @param array  $block Block data.
+	 * @param string $type Block type.
 	 * @return string
 	 */
-	public static function parse_heading( string $heading, array $heading_content ): string {
-		if ( empty( $heading_content['rich_text'] ) ) {
-			return '';
+	public function parse_heading( string $html, array $block, string $type ): string {
+		$block_content = $block[ $type ];
+
+		if ( empty( $block_content['rich_text'] ) ) {
+			return $html;
 		}
 
-		$text = self::parse_rich_text( $heading_content['rich_text'], true );
+		$text = $this->parse_rich_text( $block_content['rich_text'], true );
 
 		// don't parse rich text, as headings have their own styles.
-		list( , $size ) = explode( '_', $heading );
+		list( , $size ) = explode( '_', $type );
 
 		$json_string = ' ';
 		if ( 1 === (int) $size ) {
 			$json_string = ' {"level":1} ';
 		}
 
-		$heading_markup = '<!-- wp:heading%3$s-->' . self::CRLF
+		$html = '<!-- wp:heading%3$s-->' . self::CRLF
 							. '<h%1$s class="wp-block-heading">%2$s</h%1$s>' . self::CRLF
 							. '<!-- /wp:heading -->' . self::CRLF;
 
-		return vsprintf( $heading_markup, array( $size, $text, $json_string ) );
+		return vsprintf( $html, array( $size, $text, $json_string ) );
 	}
 
 	/**
 	 * Parse paragraph blocks
 	 *
-	 * @param array $block_content Block content to parse.
+	 * @param string $html String passed from init.
+	 * @param array  $block Block content to parse.
+	 * @param string $type Block type.
 	 *
 	 * @return string
 	 */
-	public static function parse_paragraph( array $block_content ): string {
+	public function parse_paragraph( string $html, array $block, string $type ): string {
+		$block_content = $block[ $type ];
+
 		if ( ! isset( $block_content['rich_text'] ) ) {
-			return '';
+			return $html;
 		}
 
 		$block_code = '<!-- wp:paragraph -->' . self::CRLF
 						. '<p>%s</p>' . self::CRLF
 						. '<!-- /wp:paragraph -->';
 
-		$text = self::parse_rich_text( $block_content['rich_text'], false );
+		$text = $this->parse_rich_text( $block_content['rich_text'], false );
 
 		return vsprintf( $block_code, array( $text ) ) . self::CRLF;
 	}
@@ -242,18 +257,54 @@ class Block {
 	/**
 	 * Parse block content for video
 	 *
-	 * @param array $block_content Block content to parse.
+	 * @param string $html Empty string.
+	 * @param array  $block Block content to parse.
+	 * @param string $type Block type.
 	 *
 	 * @global \WP_Embed $wp_embed
 	 * @return string
 	 */
-	public static function parse_video( array $block_content ): string {
-		$type = $block_content['type'];
-		$html = '';
-		if ( 'external' === $type ) {
-			$url  = $block_content[ $type ]['url'];
+	public function parse_video( string $html, array $block, string $type ): string {
+		if ( empty( $block[ $type ] ) ) {
+			return $html;
+		}
+
+		$block_content = $block[ $type ];
+		if ( 'external' === $block_content['type'] ) {
+			$url  = $block_content['external']['url'];
 			$data = self::get_oembed_data( $url );
-			$html = $data->html;
+			if ( is_wp_error( $data ) ) {
+				return $html;
+			}
+			$caption = $this->parse_rich_text( $block_content['caption'] );
+			if ( ! empty( $caption ) ) {
+				$caption = sprintf( '<figcaption class="wp-element-caption">%s</figcaption>', $caption );
+			}
+
+			$video  = new Embed( (array) $data );
+			$params = array(
+				'url'              => $url,
+				'type'             => $video->get_type(),
+				'providerNameSlug' => sanitize_title( $video->get_provider_name() ),
+				'responsive'       => true,
+				'className'        => array(
+					'wp-embed-aspect-16-9',
+					'wp-has-aspect-ratio',
+				),
+			);
+
+			$block_html = '<figure class="wp-block-embed is-type-%1$s is-provider-%2$s wp-block-embed-%2$s wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">%3$s</div>%4$s</figure>';
+			$block_html = vsprintf(
+				$block_html,
+				array(
+					$params['type'],
+					$params['providerNameSlug'],
+					$url,
+					$caption,
+				)
+			);
+
+			$html = $this->wrap_block( $block_html, 'embed', $params );
 		}
 
 		return $html;
@@ -262,32 +313,33 @@ class Block {
 	/**
 	 * Parse image block
 	 *
-	 * @param array $block_content Block content to parse.
+	 * @param string $html Empty string.
+	 * @param array  $block Block content to parse.
+	 * @param string $type Block type.
 	 *
 	 * @return string
 	 */
-	public static function parse_image( array $block_content ): string {
-		$type = $block_content['type'];
-		$html = '';
+	public function parse_image( string $html, array $block, string $type ): string {
+		$block_content = $block[ $type ];
 
-		if ( 'file' === $type ) {
-			// here, we'll want some preparations for importing image from Notion.
-			$img_src = $block_content[ $type ]['url'];
-			// importing will need to happen here.
+		$location = $block_content['type'];
+		$img_src  = $block_content[ $location ]['url'];
+
+		if ( 'file' === $location ) {
+			// an import should happen here when the time comes
 		}
 
-		$img_src = $block_content[ $type ]['url'];
 		$img_tag = sprintf( '<img src="%s" alt="" />', $img_src );
-
-		$html .= '<figure class="wp-block-image size-large">' . $img_tag;
+		$html   .= '<figure class="wp-block-image size-large">' . $img_tag;
 
 		if ( ! empty( $block_content['caption'] ) ) {
-			$caption = self::parse_rich_text( $block_content['caption'] );
+			$caption = $this->parse_rich_text( $block_content['caption'] );
 			$html   .= sprintf( '<figcaption class="wp-element-caption">%s</figcaption>', $caption );
 		}
 
 		$html .= '</figure>';
-		return self::wrap_block( $html, 'image', array( 'sizeSlug' => 'large' ) );
+
+		return $this->wrap_block( $html, 'image', array( 'sizeSlug' => 'large' ) );
 	}
 
 	/**
@@ -297,7 +349,7 @@ class Block {
 	 *
 	 * @return string
 	 */
-	public static function parse_columns( string $id ): string {
+	public function parse_columns( string $id ): string {
 		$children = \JesGs\Notion\Api\Block\Block::get_children( $id );
 		if ( empty( $children ) ) {
 			return '';
@@ -314,9 +366,8 @@ class Block {
 
 			$html .= '<!-- wp:column -->'
 					. '<div class="wp-block-column">';
-			$html .= self::select_block_type_to_parse( $child );
-			$html .= '</div>'
-					. '<!-- /wp:column -->';
+			$html .= $this->select_block_type_to_parse( $child );
+			$html .= '</div><!-- /wp:column -->';
 		}
 
 		$html .= '</div>'; // closes .wp-block-columns.
@@ -326,30 +377,27 @@ class Block {
 	}
 
 	/**
-	 * Parse table data
-	 *
-	 * @param string $id ID of child-block to load.
-	 *
-	 * @return string
-	 */
-	public static function parse_table( string $id ): string { // @phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
-		return '';
-	}
-
-	/**
 	 * Generate bookmark markup
 	 *
-	 * @param array $block_content Block content array to parse.
+	 * @param string $html HTML string.
+	 * @param array  $block Block content array to parse.
+	 * @param string $type Block type.
 	 *
 	 * @return string
 	 */
-	public static function parse_bookmark( array $block_content ): string {
-		$caption = '';
-		if ( ! empty( $block_content['caption'] ) ) {
-			$caption = '<span class="wp-caption">' . self::parse_rich_text( $block_content['caption'] ) . '</span>';
+	public function parse_bookmark( string $html, array $block, string $type ): string {
+		if ( empty( $block[ $type ] ) ) {
+			return $html;
 		}
 
-		$data          = self::get_oembed_data( $block_content['url'] );
+		$block_content = $block[ $type ];
+
+		$caption = '';
+		if ( ! empty( $block_content['caption'] ) ) {
+			$caption = '<span class="wp-caption">' . $this->parse_rich_text( $block_content['caption'] ) . '</span>';
+		}
+
+		$data          = $this->get_oembed_data( $block_content['url'] );
 		$title         = $data->title ?? '';
 		$thumbnail_url = $data->thumbnail_url ?? '';
 
@@ -377,9 +425,9 @@ class Block {
 	 *
 	 * @param string $url URL to get oEmbed data for.
 	 *
-	 * @return mixed
+	 * @return array|\WP_Error
 	 */
-	public static function get_oembed_data( string $url ): \stdClass {
+	public function get_oembed_data( string $url ): \stdClass|\WP_Error {
 		$request = new \WP_REST_Request( 'GET', '/oembed/1.0/proxy' );
 		$request->set_query_params(
 			array(
@@ -388,8 +436,14 @@ class Block {
 		);
 
 		$response = rest_do_request( $request );
-		$data     = $response->get_data();
-		return $data;
+		if ( 200 !== $response->get_status() ) {
+			return new \WP_Error(
+				$response->get_status(),
+				__( 'No data returned', 'jesgs_notion' )
+			);
+		}
+
+		return $response->get_data();
 	}
 
 	/**
@@ -401,16 +455,20 @@ class Block {
 	 *
 	 * @return string
 	 */
-	public static function wrap_block( $html, $block_name, $attrs = array() ): string {
-		$opening_block_tag            = '<!-- wp:%s';
-		$closing_of_opening_block_tag = ' %s -->';
-		$closing_block_tag            = '<!-- /wp:%s -->';
+	public function wrap_block( string $html, string $block_name, array $attrs = array() ): string {
+		$opening_block_tag            = "\r\n" . '<!-- wp:%s';
+		$closing_of_opening_block_tag = '%s-->' . "\r\n";
+		$closing_block_tag            = "\r\n" . '<!-- /wp:%s -->';
 
-		$attrs_json = wp_json_encode( $attrs );
-		$content    = sprintf( $opening_block_tag, $block_name );
-		$content   .= sprintf( $closing_of_opening_block_tag, $attrs_json );
-		$content   .= $html;
-		$content   .= sprintf( $closing_block_tag, $block_name );
+		$attrs_json = ' ';
+		if ( ! empty( $attrs ) ) {
+			$attrs_json = ' ' . wp_json_encode( $attrs ) . ' ';
+		}
+
+		$content  = sprintf( $opening_block_tag, $block_name );
+		$content .= sprintf( $closing_of_opening_block_tag, $attrs_json );
+		$content .= $html;
+		$content .= sprintf( $closing_block_tag, $block_name );
 
 		return $content;
 	}
@@ -422,14 +480,14 @@ class Block {
 	 *
 	 * @return string
 	 */
-	public static function parse_file( array $block_content ): string {
+	public function parse_file( array $block_content ): string {
 		$type = $block_content['type'];
 		if ( 'external' !== $type ) {
 			return '';
 		}
 
 		$url     = $block_content[ $type ]['url'];
-		$caption = self::parse_rich_text( $block_content['caption'] );
+		$caption = $this->parse_rich_text( $block_content['caption'] );
 		$name    = $block_content['name'];
 
 		$caption_formatted = $caption ? ' <span>' . $caption . '</span>' : '';
@@ -448,5 +506,37 @@ class Block {
 				$caption_formatted,
 			)
 		);
+	}
+
+	/**
+	 * Parse list items.
+	 *
+	 * @param string $list_html HTML string.
+	 * @param array  $block Block content to parse.
+	 * @param string $type Block data type.
+	 *
+	 * @return string
+	 */
+	public function parse_list_item( string $list_html, array $block, string $type ): string {
+		$list_item         = $this->wrap_block( '<li>%1$s%2$s</li>', 'list-item' ) . "\r\n";
+		$list_item_content = $this->parse_rich_text( $block[ $type ]['rich_text'] );
+
+		$list_items = array();
+		$sub_list   = '';
+
+		if ( $block['has_children'] ) {
+			$children = \JesGs\Notion\Api\Block\Block::get_children( $block['id'] );
+
+			foreach ( $children as $child ) {
+				$child_type    = $child['type'];
+				$list_item_str = sprintf( $list_item, $this->parse_rich_text( $child[ $child_type ]['rich_text'] ), '' );
+				$list_items[]  = $this->wrap_block( $list_item_str, 'list-item' );
+			}
+
+			$list_items_string = implode( '', $list_items );
+			$sub_list          = sprintf( $list_html, $list_items_string );
+		}
+
+		return vsprintf( $list_item, array( $list_item_content, $sub_list ) );
 	}
 }
