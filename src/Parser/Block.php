@@ -93,7 +93,7 @@ class Block {
 				$block_prev = ! empty( $blocks[ $c - 1 ] ) ? $blocks[ $c - 1 ] : false;
 				if ( $block_prev && $block_prev['type'] !== $type ) {
 					$list_output = '';
-					$list_items = array();
+					$list_items  = array();
 				}
 
 				$list_items[] = apply_filters( "jesgs_notion/parse/{$type}", $list, $block, $type );
@@ -103,9 +103,6 @@ class Block {
 					$list_output = sprintf( $list, implode( '', $list_items ) );
 				}
 
-				echo '<pre>';
-				echo esc_html( $list_output );
-				echo '</pre>';
 				$html .= $list_output;
 			}
 		}
@@ -532,11 +529,9 @@ class Block {
 			}
 
 			$children = \JesGs\Notion\Api\Block\Block::get_children( $block['id'] );
-
 			foreach ( $children as $child ) {
-				$child_type    = $child['type'];
-				$list_item_str = sprintf( $list_item, $this->parse_rich_text( $child[ $child_type ]['rich_text'] ), '' );
-				$list_items[]  = $this->wrap_block( $list_item_str, 'list-item' );
+				$child_type   = $child['type'];
+				$list_items[] = sprintf( $list_item, $this->parse_rich_text( $child[ $child_type ]['rich_text'] ), '' );
 			}
 
 			$list_items_string = implode( '', $list_items );
