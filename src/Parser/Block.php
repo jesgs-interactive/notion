@@ -38,8 +38,8 @@ class Block {
 		add_filter( 'jesgs_notion/parse/bookmark', array( $this, 'parse_bookmark' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/bulleted_list_item', array( $this, 'parse_list_item' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/numbered_list_item', array( $this, 'parse_list_item' ), 11, 3 );
-		// add_filter( 'jesgs_notion/parse/columns', array( $this, 'parse_columns' ), 11, 3  )
-		add_filter( 'jesgs_notion/parse/caption', array( $this, 'parse_caption' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/column_list', array( $this, 'parse_columns' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/divider', array( $this, 'parse_divider' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/heading_1', array( $this, 'parse_heading' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/heading_2', array( $this, 'parse_heading' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/heading_3', array( $this, 'parse_heading' ), 11, 3 );
@@ -50,38 +50,27 @@ class Block {
 	}
 
 	/**
-	 * Parse array of blocks
-	 *
-	 * @param array $block_data Array of blocks to parse.
-	 *
-	 * @return string
-	 */
-	public static function pre_parse_blocks( array $block_data ): string {
-
-		if ( empty( $block_data['results'] ) ) {
-			return '';
-		}
-
-		$blocks = $block_data['results'];
-
-		return self::parse_blocks( $blocks );
-	}
-
-	/**
 	 * Parse list of blocks
 	 *
-	 * @param array  $blocks Blocks to be parsed.
+	 * @param array  $block_data Blocks to be parsed.
 	 * @param string $html Html string to append to.
 	 *
 	 * @return string
 	 */
-	public static function parse_blocks( array $blocks, string $html = '' ): string {
+	public static function parse_blocks( array $block_data, string $html = '' ): string {
+		if ( empty( $block_data['results'] ) ) {
+			return $html;
+		}
+
+		$blocks = $block_data['results'];
+
 		$html         = '';
 		$group_blocks = array( 'bulleted_list_item', 'numbered_list_item' );
 		$list_items   = array();
 		$list_output  = '';
 		foreach ( $blocks as $c => $block ) {
 			$type = $block['type'];
+			var_dump($type);
 			if ( ! in_array( $type, $group_blocks, true ) ) {
 				$html .= apply_filters( "jesgs_notion/parse/{$type}", '', $block, $type );
 			} else {
@@ -108,34 +97,6 @@ class Block {
 		}
 
 		return $html;
-	}
-
-	/**
-	 * Select block to parse
-	 *
-	 * @param array $block Block to parse.
-	 *
-	 * @return string
-	 */
-	public function select_block_type_to_parse( array $block ): string {
-		$type          = $block['type'];
-		$block_content = $block[ $type ];
-
-		switch ( $type ) {
-			case str_contains( $type, 'heading_' ):
-				return self::parse_heading( $type, $block_content );
-			case 'paragraph':
-				return self::parse_paragraph( $block_content );
-			case 'video':
-				return self::parse_video( $block_content );
-			case 'image':
-				return self::parse_image( $block_content );
-			case 'file':
-				return self::parse_file( $block_content );
-			default:
-		}
-
-		return '';
 	}
 
 	/**
@@ -343,28 +304,31 @@ class Block {
 	/**
 	 * Parse column data
 	 *
-	 * @param string $id ID of child-block to load.
+	 * @param string $html Empty string.
+	 * @param array  $block Block content to parse.
+	 * @param string $type Block type.
 	 *
 	 * @return string
 	 */
-	public function parse_columns( string $id ): string {
-		$children = \JesGs\Notion\Api\Block\Block::get_children( $id );
+	public function parse_columns( string $html, array $block, string $type ): string { // @phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- $type is needed here
+		$children = \JesGs\Notion\Api\Block\Block::get_children( $block['id'] );
+
 		if ( empty( $children ) ) {
-			return '';
+			return $html;
 		}
 
 		$html = '<!-- wp:columns -->'
 				. '<div class="wp-block-columns">';
 
 		foreach ( $children as $child ) {
-			$type = $child['type'];
-			if ( isset( $child[ $type ]['rich_text'] ) && empty( $child[ $type ]['rich_text'] ) ) {
+			$child_type = $child['type'];
+			if ( isset( $child[ $child_type ]['rich_text'] ) && empty( $child[ $child_type ]['rich_text'] ) ) {
 				continue;
 			}
 
 			$html .= '<!-- wp:column -->'
 					. '<div class="wp-block-column">';
-			$html .= $this->select_block_type_to_parse( $child );
+			$html .= apply_filters( "jesgs_notion/parse/{$child_type}", '', $child, $child_type );
 			$html .= '</div><!-- /wp:column -->';
 		}
 
@@ -372,6 +336,19 @@ class Block {
 		$html .= '<!-- /wp:columns -->';
 
 		return $html;
+	}
+
+	/**
+	 * Output divider markup
+	 *
+	 * @param string $html HTML String.
+	 * @param array  $block Array of block data.
+	 * @param string $type Block type.
+	 *
+	 * @return string
+	 */
+	public function parse_divider( string $html, array $block, string $type ): string { // @phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- none of the parameters are used but are needed because they're hooked
+		return $this->wrap_block( '<hr class="wp-block-separator has-alpha-channel-opacity" />', 'separator' );
 	}
 
 	/**

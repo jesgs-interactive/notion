@@ -114,7 +114,7 @@ class Admin {
 
 		echo '<div class="preview-content-import">';
 //		echo apply_filters( 'the_content', BlockParser::pre_parse_blocks( $page_data ) );
-		echo BlockParser::pre_parse_blocks( $page_data );
+		echo BlockParser::parse_blocks( $page_data );
 		echo "\r\n" . '</div>';
 	}
 }
