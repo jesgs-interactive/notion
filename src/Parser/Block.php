@@ -39,6 +39,7 @@ class Block {
 		add_filter( 'jesgs_notion/parse/bulleted_list_item', array( $this, 'parse_list_item' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/numbered_list_item', array( $this, 'parse_list_item' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/column_list', array( $this, 'parse_columns' ), 11, 3 );
+		add_filter( 'jesgs_notion/parse/callout', array( $this, 'parse_callout' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/divider', array( $this, 'parse_divider' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/heading_1', array( $this, 'parse_heading' ), 11, 3 );
 		add_filter( 'jesgs_notion/parse/heading_2', array( $this, 'parse_heading' ), 11, 3 );
@@ -70,7 +71,6 @@ class Block {
 		$list_output  = '';
 		foreach ( $blocks as $c => $block ) {
 			$type = $block['type'];
-			var_dump($type);
 			if ( ! in_array( $type, $group_blocks, true ) ) {
 				$html .= apply_filters( "jesgs_notion/parse/{$type}", '', $block, $type );
 			} else {
@@ -336,6 +336,30 @@ class Block {
 		$html .= '<!-- /wp:columns -->';
 
 		return $html;
+	}
+
+	/**
+	 * Output callout block
+	 *
+	 * @param string $html Empty string.
+	 * @param array  $block Block content to parse.
+	 * @param string $type Block type.
+	 *
+	 * @return string
+	 */
+	public function parse_callout( string $html, array $block, string $type ): string {
+		$rich_text = $this->parse_rich_text( $block[ $type ]['rich_text'] );
+
+		$icon_data = $block[ $type ]['icon'];
+		$icon      = '';
+		if ( 'emoji' === $icon_data['type'] ) {
+			$icon = $icon_data['emoji'] . ' ';
+			var_dump($icon);
+		}
+
+		$html = '<p class="has-tertiary-background-color has-background">' . $icon . $rich_text . '</p>';
+
+		return $this->wrap_block( $html, 'paragraph', array( 'backgroundColor' => 'tertiary' ) );
 	}
 
 	/**

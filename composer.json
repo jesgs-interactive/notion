@@ -10,7 +10,10 @@
     "autoload": {
         "psr-4": {
             "JesGs\\Notion\\": "src/"
-        }
+        },
+        "files" : [
+          "blocks/callout/callout.php"
+        ]
     },
     "authors": [
         {
