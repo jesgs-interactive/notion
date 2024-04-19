@@ -1,23 +1,7 @@
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
+import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 import './style.scss';
-
-/**
- * Internal dependencies
- */
-import Edit from './edit';
 import metadata from './block.json';
 
 /**
@@ -26,8 +10,31 @@ import metadata from './block.json';
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType( metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
+	attributes: {
+		content: {
+			type: 'string',
+			source: 'html',
+			selector: 'p',
+		},
+	},
+	edit( { attributes, setAttributes } ) {
+		const blockProps = useBlockProps();
+
+		return (
+			<RichText
+				{ ...blockProps }
+				tagName="p"
+				value={ attributes.content }
+				allowedFormats={ [ 'core/bold', 'core/italic' ] }
+				onChange={ ( content ) => setAttributes( { content } ) }
+				placeholder={ __( 'Callout...' ) }
+			/>
+		);
+	},
+
+	save( { attributes } ) {
+		const blockProps = useBlockProps.save();
+
+		return <RichText.Content { ...blockProps } tagName="p" value={ attributes.content } />;
+	}
 } );
