@@ -24,6 +24,6 @@ if ( ! defined( 'JESGS_NOTION_URLPATH' ) ) {
 
 require_once 'vendor/autoload.php';
 
-if ( class_exists( 'JesGs\Notion\Bootstrap', ! wp_doing_ajax() ) ) {
+if ( class_exists( 'JesGs\Notion\Bootstrap' ) && ! wp_doing_ajax() ) {
 	\JesGs\Notion\Bootstrap::init();
 }
