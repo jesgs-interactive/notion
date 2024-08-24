@@ -4,5 +4,5 @@
  */
 ?>
 <p <?php echo get_block_wrapper_attributes(); ?>>
-	<?php esc_html_e( 'Callout – hello from a dynamic block!', 'callout' ); ?>
+	<?php var_dump($attributes);?>
 </p>

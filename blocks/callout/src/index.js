@@ -16,6 +16,11 @@ registerBlockType( metadata.name, {
 			source: 'html',
 			selector: 'p',
 		},
+		calloutImg: {
+			type: 'string',
+			source: 'html',
+			selector: 'img',
+		}
 	},
 	edit( { attributes, setAttributes } ) {
 		const blockProps = useBlockProps();

@@ -353,13 +353,14 @@ class Block {
 		$icon_data = $block[ $type ]['icon'];
 		$icon      = '';
 		if ( 'emoji' === $icon_data['type'] ) {
-			$icon = $icon_data['emoji'] . ' ';
+			$icon = wp_staticize_emoji( $icon_data['emoji'] ) . ' ';
 			var_dump($icon);
+			echo $icon;
 		}
 
-		$html = '<p class="has-tertiary-background-color has-background">' . $icon . $rich_text . '</p>';
+		$html = '<p class="wp-block-notion-callout has-tertiary-background-color has-background">' . $icon . $rich_text . '</p>';
 
-		return $this->wrap_block( $html, 'paragraph', array( 'backgroundColor' => 'tertiary' ) );
+		return $this->wrap_block( $html, 'wp:notion/callout', array( 'backgroundColor' => 'tertiary' ) );
 	}
 
 	/**

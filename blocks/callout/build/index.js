@@ -37,6 +37,11 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       source: 'html',
       selector: 'p'
+    },
+    calloutImg: {
+      type: 'string',
+      source: 'html',
+      selector: 'img'
     }
   },
   edit({
