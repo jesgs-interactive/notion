@@ -246,10 +246,7 @@ class Block {
 				'type'             => $video->get_type(),
 				'providerNameSlug' => sanitize_title( $video->get_provider_name() ),
 				'responsive'       => true,
-				'className'        => array(
-					'wp-embed-aspect-16-9',
-					'wp-has-aspect-ratio',
-				),
+				'className'        => 'wp-embed-aspect-16-9 wp-has-aspect-ratio',
 			);
 
 			$block_html = '<figure class="wp-block-embed is-type-%1$s is-provider-%2$s wp-block-embed-%2$s wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">%3$s</div>%4$s</figure>';
