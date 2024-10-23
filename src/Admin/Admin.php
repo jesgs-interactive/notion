@@ -101,20 +101,8 @@ class Admin {
 		);
 
 		$page_data = Block::query( $notion_page_id );
-		echo '<h2>Import Page</h2>';
-		echo '<p>Import this page? [<a href="' . esc_url( $admin_url ) . '">Import</a>]</p>';
 
-		echo "\t" . '<style>' . "\r\n";
-		echo "\t\t" . '.preview-content-import img {' . "\r\n";
-		echo "\t\t\t" . 'height: 400px;' . "\r\n";
-		echo "\t\t\t" . 'width: auto;' . "\r\n";
-		echo "\t\t}\r\n";
+		$page_data_parsed = BlockParser::parse_blocks( $page_data );
 
-		echo "\t" . '</style>' . "\r\n";
-
-		echo '<div class="preview-content-import">';
-//		echo apply_filters( 'the_content', BlockParser::pre_parse_blocks( $page_data ) );
-		echo BlockParser::parse_blocks( $page_data );
-		echo "\r\n" . '</div>';
 	}
 }

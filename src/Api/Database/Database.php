@@ -14,8 +14,6 @@ use JesGs\Notion\Model\ObjectList;
 
 /**
  * Database API class
- *
- * 30201d4defff43209f923801ea1a1f8f/query
  */
 class Database {
 
