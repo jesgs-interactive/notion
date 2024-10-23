@@ -65,6 +65,7 @@ class DatabaseListTable extends \WP_List_Table {
 			'summary' => 'Summary',
 			'tags'    => 'Tags',
 			'url'     => 'URL',
+			'import'  => 'Import',
 		);
 	}
 
@@ -160,6 +161,23 @@ class DatabaseListTable extends \WP_List_Table {
 					$title,
 					$database_row->get_url(),
 					$admin_url,
+				)
+			);
+
+			$import_url = add_query_arg(
+				array(
+					'page'           => Admin::ADMIN_PAGE_SLUG,
+					'notion_page_id' => $database_row->get_id(),
+					'import'         => true,
+				),
+				admin_url( 'options-general.php' )
+			);
+
+			$row['import'] = vsprintf(
+				'<a href="%2$s" target="_blank">%1$s</a>', // target=_blank is temporary, eventually will be replaced with an async call
+				array(
+					'Import',
+					$import_url,
 				)
 			);
 
